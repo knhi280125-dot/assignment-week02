@@ -8,10 +8,6 @@ def index():
     return '歡迎進入玩慶兒的網頁!
 <a href="/math">點進去輸入x, opt, y (數學運算)'
 
-@app.route("/mis")
-def course():
-    return "這是資管系的課程頁面"
-
 @app.route("/today")
 def today():
     tz = timezone(timedelta(hours=+8))
@@ -28,30 +24,17 @@ def math():
             if opt == "+": res = x + y
             elif opt == "-": res = x - y
             elif opt == "*": res = x * y
-            elif opt == "/": res = x / y if y != 0 else "Lỗi chia cho 0"
-            else: res = "Phép tính không hợp lệ"
-            return f"Kết quả: {x} {opt} {y} = {res}
-
-<a href='/math'>Quay lại"
+            elif opt == "/": res = x / y if y != 0 else "Error: Division by 0"
+            else: res = "Invalid"
+            return f"Kết quả: {res}
+<a href='/math'>Back"
         except:
-            return "Vui lòng nhập số hợp lệ!
-<a href='/math'>Quay lại"
-    return '''
-        <form method="post">
-            Số x: <input type="number" name="x" step="any" required>
+            return "Error!
+<a href='/math'>Back"
+    return '<form method="post">x:<input name="x"> opt:<input name="opt"> y:<input name="y">Calc</form>'
 
-
-            Phép tính (+, -, *, /): <input type="text" name="opt" required>
-
-
-            Số y: <input type="number" name="y" step="any" required>
-
-
-            <button type="submit">計算 (Tính toán)
-        </form>
-        
-<a href="/">Quay về trang chủ
-    '''
+if __name__ == "__main__":
+    app.run(debug=True)
 
 if __name__ == "__main__":
     app.run(debug=True)
