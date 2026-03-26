@@ -1,20 +1,19 @@
-from flask import Flask, render_template
-from datetime import datetime
+from flask import Flask, render_template, request
+
+from datetime import datetime, timezone, timedelta
 
 app = Flask(__name__)
 
-@app.route("/")
-def index():
-    return "歡迎進入阮慶兒的網頁!"
-
-@app.route("/mis")
-def course():
-    return "這是資管系的課程頁面"
+…
 
 @app.route("/today")
-def today():
-    now = datetime.now().strftime("%Y/%m/%d")
-    return render_template("today.html", datetime=now)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+def today():
+
+tz = timezone(timedelta(hours=+8))
+
+now = datetime.now(tz)
+
+return render_template("today.html", datetime = str(now))
+
+…
